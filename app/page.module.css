@@ -1,150 +1,93 @@
-.page {
-  --background: #fafafa;
-  --foreground: #fff;
-
-  --text-primary: #000;
-  --text-secondary: #666;
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-  --button-secondary-border: #ebebeb;
-
-  display: flex;
-  flex: 1;
-  flex-direction: column;
+/* ------------------------------- hero ------------------------------------- */
+.hero {
+  min-height: 100svh;
+  display: grid;
   align-items: center;
-  justify-content: center;
-  font-family: var(--font-geist-sans);
-  background-color: var(--background);
+  padding: var(--space-lg) var(--gutter);
+  /* A faint maroon wash at the top edge so the page does not open on flat white. */
+  background:
+    radial-gradient(120% 80% at 10% -10%, rgba(122, 0, 25, 0.07) 0%, transparent 60%),
+    var(--bg);
 }
 
-.main {
-  display: flex;
-  flex: 1;
+.heroText {
+  max-width: 52rem;
+  margin: 0 auto;
   width: 100%;
-  max-width: 800px;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  background-color: var(--foreground);
-  padding: 120px 60px;
 }
 
-.intro {
+.scrollCue {
+  margin-top: clamp(2rem, 6vh, 4rem);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 24px;
-}
-
-.intro h1 {
-  max-width: 320px;
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 48px;
-  letter-spacing: -2.4px;
-  text-wrap: balance;
-  color: var(--text-primary);
-}
-
-.intro p {
-  max-width: 440px;
-  font-size: 18px;
-  line-height: 32px;
-  text-wrap: balance;
-  color: var(--text-secondary);
-}
-
-.intro a {
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-.ctas {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  max-width: 440px;
-  gap: 16px;
-  font-size: 14px;
-}
-
-.ctas a {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 128px;
-  border: 1px solid transparent;
-  transition: 0.2s;
-  cursor: pointer;
-  width: fit-content;
-  font-weight: 500;
+  gap: 0.6rem;
+}
+.scrollCue::after {
+  content: '';
+  width: 1px;
+  height: 2.2rem;
+  background: linear-gradient(var(--ink-faint), transparent);
 }
 
-a.primary {
-  background: var(--text-primary);
-  color: var(--background);
-  gap: 8px;
+/* Caption sitting over a pinned scrub canvas. */
+.overlay {
+  position: absolute;
+  left: var(--gutter);
+  top: clamp(1.5rem, 8vh, 4rem);
+  right: var(--gutter);
+  pointer-events: none;
+}
+.overlay h2 {
+  max-width: 24ch;
+  margin: 0;
 }
 
-a.secondary {
-  border-color: var(--button-secondary-border);
-}
-
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
-  }
-
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
+@media (min-width: 900px) and (min-aspect-ratio: 4 / 3) {
+  .overlay {
+    left: clamp(2rem, 6vw, 5rem);
+    right: auto;
+    max-width: 30rem;
   }
 }
 
-@media (max-width: 600px) {
-  .main {
-    padding: 48px 24px;
-  }
-
-  .intro {
-    gap: 16px;
-  }
-
-  .intro h1 {
-    font-size: 32px;
-    line-height: 40px;
-    letter-spacing: -1.92px;
-  }
+.note {
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+  font-style: italic;
 }
 
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
-  }
-
-  .page {
-    --background: #000;
-    --foreground: #000;
-
-    --text-primary: #ededed;
-    --text-secondary: #999;
-
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-    --button-secondary-border: #1a1a1a;
-  }
+/* ------------------------------ footer ------------------------------------ */
+.footer {
+  margin-top: var(--space-lg);
+  padding: var(--space-lg) var(--gutter);
+  background: var(--bg-tint);
+  border-top: 3px solid var(--maroon);
 }
 
-.code {
-  font-family: var(--font-geist-mono);
-  font-size: 0.9em;
-  background: color-mix(in srgb, currentColor 8%, transparent);
-  padding: 0.1em 0.4em;
-  border-radius: 6px;
+.footerLede {
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  max-width: 40rem;
+  color: var(--ink-soft);
+}
+
+.meta {
+  margin: var(--space-md) 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(11rem, 100%), 1fr));
+  gap: 1.25rem 2rem;
+}
+.meta dt {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 0.2rem;
+}
+.meta dd {
+  margin: 0;
+  font-weight: 560;
 }

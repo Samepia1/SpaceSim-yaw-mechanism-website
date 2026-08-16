@@ -1,0 +1,12 @@
+{
+  "assembly": {
+    "count": 140,
+    "ext": "webp",
+    "pad": 4
+  },
+  "prototype": {
+    "count": 120,
+    "ext": "webp",
+    "pad": 4
+  }
+}

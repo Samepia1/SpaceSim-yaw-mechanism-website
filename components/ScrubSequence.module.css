@@ -1,0 +1,58 @@
+/* The track is tall; the sticky child is what the visitor actually sees. Its
+   height is the travel distance the scrub maps onto. */
+.track {
+  position: relative;
+  width: 100%;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh; /* avoids the iOS toolbar jump mid-scrub */
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.canvas[data-ready='true'] {
+  opacity: 1;
+}
+
+/* Thin progress rail so it is obvious the section responds to scrolling. */
+.rail {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(1rem, 4vh, 2.5rem);
+  transform: translateX(-50%);
+  width: min(220px, 40vw);
+  height: 2px;
+  background: color-mix(in srgb, var(--maroon) 18%, transparent);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.railFill {
+  width: 100%;
+  height: 100%;
+  background: var(--maroon);
+  transform-origin: left center;
+}
+
+/* prefers-reduced-motion: a single representative still, no pinning. */
+.reduced {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: var(--space-lg) 0;
+}
+.still {
+  max-width: 100%;
+  height: auto;
+}
