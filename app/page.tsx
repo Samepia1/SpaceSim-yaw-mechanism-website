@@ -24,7 +24,7 @@ export default function Home() {
           </h1>
           <p className="lede">
             A cable-driven parallel robot positions its payload with cables. Turn the
-            payload and those cables converge on each other &mdash; so yaw runs out
+            payload and those cables converge on each other, so yaw runs out
             long before the workspace does. This is the mechanism that removes that
             limit, from bench prototype to full scale.
           </p>
@@ -60,13 +60,12 @@ export default function Home() {
       <section className="section">
         <div className="split">
           <div>
-            <p className="eyebrow">Bench scale</p>
-            <h2>Built to close the loop, not just to look right</h2>
+            <p className="eyebrow">The Initial Idea</p>
+            <h2>The Main Consideration: Continuous Rotation</h2>
             <p>
-              The first build put a planetary yaw drive under the payload frame with
-              the motor off the axis of rotation, and a magnetic encoder on the yaw
-              axis itself rather than on the motor &mdash; so the controller reads the
-              angle that actually matters.
+              The first build put a planetary yaw drive under the payload frame,
+              and a magnetic encoder on the yaw axis itself rather than on the motor,
+              so the controller reads the angle that matters for the closed-loop-control.
             </p>
             <p>
               It was modelled with true mass and inertia properties, which meant the
@@ -104,8 +103,7 @@ export default function Home() {
             <p className="eyebrow">On the robot</p>
             <h2>It exists, and it turns</h2>
             <p>
-              Filmed on the lab&rsquo;s cable-driven parallel robot in slow motion.
-              Renders prove intent; this proves the thing was built.
+              Filmed on the lab&rsquo;s cable-driven parallel robot.
             </p>
           </div>
           <Clip
@@ -127,7 +125,7 @@ export default function Home() {
             <p>
               Scaling the prototype meant machining almost every part. The redesign
               replaced the custom gearbox and machined holders with off-the-shelf
-              gears, pillow-block bearings and extrusion &mdash; leaving exactly one
+              gears, pillow-block bearings and extrusion. Now we have exactly one
               custom part, the shaft-to-payload attachment.
             </p>
             <ul className="specs">
@@ -179,7 +177,7 @@ export default function Home() {
             <p className="eyebrow">Full-scale walkthrough</p>
             <h2>The finished design</h2>
             <p>
-              A pass over the full-scale payload: the 1&nbsp;in 1144 carbon-steel
+              A pass over the full-scale payload: the 1&nbsp;inch 1144 carbon-steel
               shaft, the carbon-steel gear pair, the bearing pillow mounts, and the
               ODrive motor that drives it all.
             </p>
