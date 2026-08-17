@@ -59,37 +59,66 @@ transcode is required for the clip to appear in Chrome or Firefox at all.
 
 ## 3D models
 
-`public/models/prototype.glb` and `public/models/fullscale.glb`. Until they exist
-the viewers render a labelled placeholder, so the layout can be worked on without
-them — a `HEAD` request decides, because a 404 inside `<Suspense>` would otherwise
-take the whole section down.
-
-Export from SolidWorks: **File → Save As → glTF Binary (.glb)** (2021 or newer).
-
-What matters for web performance, more than it does for a render:
-
-- **Suppress or hide fasteners** — screws, nuts, washers. Modelled threads produce
-  enormous triangle counts for detail nobody can see in a browser. This is usually
-  the difference between a 4 MB and a 60 MB file.
-- **Coarse or medium tessellation**, not fine.
-- **Keep the assembly tree** — do not save as one merged body. The exploded-view
-  slider moves each part node independently, so a single merged mesh cannot explode.
-
-Then shrink it:
+`public/models/prototype.glb` (0.13 MB) and `public/models/fullscale.glb` (1.72 MB),
+built from the SolidWorks glTF exports in `../Poster/Assets/`:
 
 ```bash
-node scripts/optimize-glb.mjs ~/Downloads/Small_scale.glb prototype
-node scripts/optimize-glb.mjs ~/Downloads/Payload\ Iteration.glb fullscale
+node scripts/optimize-glb.mjs "../Poster/Assets/Small Scale Payload full/Small_scale.glb" prototype
+node scripts/optimize-glb.mjs "../Poster/Assets/Final Payload/Payload_Iteration.glb"      fullscale
 ```
 
-### How the exploded view works
+The full-scale export is **60.55 MB / 1.32 M triangles**, and it compresses to 1.72 MB
+losslessly — 345 meshes turn out to be only **116 distinct geometries**, so dedup
+alone removes 60% of the triangles before Draco even runs. Nothing is decimated.
 
-No authored metadata. Each mesh's direction comes from its own bounding-box centre
-relative to the assembly centre, with the horizontal component damped — these
-assemblies are built around a vertical yaw axis, so a purely radial explosion
-throws the stacked gears and bearings sideways into each other, while biasing
-upward separates them the way the poster's exploded drawings do. Tune with the
-`spread` prop per viewer.
+For the record, the bulk is *not* fasteners: 52% of all triangles is 12 instances of
+`2x2 MAXTube - Thick Grid Pattern All Sides`, the frame extrusion, whose thousands of
+tessellated grid holes cost ~57k triangles each.
+
+### Why the script avoids `gltf-transform optimize`
+
+`optimize` is a catch-all and two of its passes break this site. Both are asserted
+against at the end of the script, which exits non-zero if either reappears:
+
+- **`instance`** rewrites repeated parts as `EXT_mesh_gpu_instancing` — one draw call
+  with per-instance transforms. The exploded view moves parts by writing node
+  positions, which instanced parts no longer have. It quietly took 345 part nodes
+  down to 313.
+- **`palette`** bakes materials into a texture atlas. Here it collapsed **48 distinct
+  base colours into one white**, flattening the orange motor and green PCB into
+  uniform plastic.
+
+So the pipeline is just `dedup` → `prune` → `draco`.
+
+The Draco decoder is **self-hosted** in `public/draco/` (copied from
+`node_modules/three/examples/jsm/libs/draco/gltf/`) rather than fetched from a Google
+CDN at runtime.
+
+### Exploded view: pick the right level of the hierarchy
+
+The two exports have different shapes, and "explode every mesh" is wrong for both:
+
+```
+full scale   Payload Iteration -> 60 children, one being `ODrive Kit.step`
+                                  which alone holds 286 meshes — every SMD
+                                  component on the S1 driver board, from STEP
+prototype    Small_scale -> one child -> 23 mesh children
+```
+
+Exploding every mesh would spray ~230 resistors and capacitors across the scene on
+one model and move nothing at all on the other. `findAssemblyRoot` therefore descends
+while a node has exactly one child **that contains geometry**, and explodes that
+node's children.
+
+The "contains geometry" part is load-bearing: SolidWorks exports a node literally
+named `current camera` that holds no camera and no mesh, just a translation. An
+`isCamera` test does not see it, so the root looked like it had two children, the
+descent stopped immediately, and the whole assembly became a single part with zero
+offset — the slider silently did nothing.
+
+The explosion is also computed **in world space** and converted back through each
+node's cached parent inverse. Offsetting `node.position` by a world-space distance
+instead would be wrong under any parent scale, which CAD exports often carry.
 
 ---
 
@@ -111,11 +140,18 @@ Checks the two things a build cannot catch on its own:
 2. **That each sequence actually scrubs**, by hashing the canvas at five scroll
    positions and requiring distinct frames — rather than showing frame 1 forever.
 
-It also reports 404s, ignoring the `.glb`s while those are still unexported.
+It also reports any 404s.
 
 Worth checking by hand as well: both videos in **Chrome and Firefox** (the HEVC
 regression), the explode slider and pinch-zoom **by touch**, and
 `prefers-reduced-motion: reduce`, which replaces scrubbing with a single still.
+
+**When driving the explode slider from a test, use `locator.fill()` or the keyboard,
+not a synthetic `input` event.** React's controlled-input value tracker swallows
+dispatched events, so the slider moves visually while state never updates — which
+looks exactly like a broken explode. In dev, `window.__explode` exposes the computed
+pieces so a test can assert on real world positions instead of reading back WebGL
+pixels (which do not reliably reflect changes).
 
 ---
 

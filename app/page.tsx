@@ -92,7 +92,7 @@ export default function Home() {
             <ModelViewer
               url="/models/prototype.glb"
               label="Prototype assembly"
-              spread={0.8}
+              spread={0.55}
             />
           </div>
         </div>
@@ -154,7 +154,7 @@ export default function Home() {
             <ModelViewer
               url="/models/fullscale.glb"
               label="Full-scale assembly"
-              spread={1.1}
+              spread={0.65}
             />
           </div>
         </div>

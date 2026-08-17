@@ -71,3 +71,31 @@
   width: clamp(110px, 22vw, 190px);
   accent-color: var(--maroon);
 }
+
+/* Draco decode of ~550k triangles takes seconds on a phone; without this the
+   stage is just an empty box and reads as broken. */
+.loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 0.6rem;
+  justify-items: center;
+  font-size: 0.8rem;
+  color: var(--ink-faint);
+  pointer-events: none;
+}
+.bar {
+  width: min(160px, 45%);
+  height: 2px;
+  background: color-mix(in srgb, var(--maroon) 18%, transparent);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.barFill {
+  width: 100%;
+  height: 100%;
+  background: var(--maroon);
+  transform-origin: left center;
+  transition: transform 0.2s ease;
+}
