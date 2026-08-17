@@ -109,7 +109,7 @@ export default function Home() {
           <Clip
             name="lab"
             webm
-            caption="The assembled prototype on the ARDC Lab CDPR, 120 fps slow motion."
+            caption="The assembled prototype on the ARDC Lab CDPR."
           />
         </div>
       </section>
