@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Independent Yaw Mechanism for a Cable-Driven Parallel Robot",
     description:
-      "Interactive 3D models and scroll-driven animations of the mechanism, " +
+      "3D models and scroll animations of the mechanism, " +
       "from prototype to full scale. ARDC Lab, University of Minnesota.",
     type: "website",
   },
