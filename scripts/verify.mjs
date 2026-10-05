@@ -14,7 +14,7 @@
  */
 import { chromium } from 'playwright';
 
-const SITE = process.env.SITE_URL ?? 'http://localhost:3111/';
+const SITE = process.env.SITE_URL ?? 'http://localhost:3111/Yaw_Mechanism';
 const browser = await chromium.launch();
 let failures = 0;
 

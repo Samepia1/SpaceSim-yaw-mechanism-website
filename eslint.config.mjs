@@ -15,6 +15,8 @@ const eslintConfig = defineConfig([
     // Vendored third-party assets: the Draco decoder is minified Emscripten
     // output and trips a dozen rules that say nothing about our code.
     "public/**",
+    // Standalone static FSAE dashboard export, published via scripts/sync-aero.mjs.
+    "fsae-aero-explorer/**",
   ]),
 ]);
 

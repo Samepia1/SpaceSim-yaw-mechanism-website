@@ -1,0 +1,93 @@
+/* ------------------------------- hero ------------------------------------- */
+.hero {
+  min-height: 100svh;
+  display: grid;
+  align-items: center;
+  padding: var(--space-lg) var(--gutter);
+  /* A faint maroon wash at the top edge so the page does not open on flat white. */
+  background:
+    radial-gradient(120% 80% at 10% -10%, rgba(122, 0, 25, 0.07) 0%, transparent 60%),
+    var(--bg);
+}
+
+.heroText {
+  max-width: 52rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.scrollCue {
+  margin-top: clamp(2rem, 6vh, 4rem);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.scrollCue::after {
+  content: '';
+  width: 1px;
+  height: 2.2rem;
+  background: linear-gradient(var(--ink-faint), transparent);
+}
+
+/* Caption sitting over a pinned scrub canvas. */
+.overlay {
+  position: absolute;
+  left: var(--gutter);
+  top: clamp(1.5rem, 8vh, 4rem);
+  right: var(--gutter);
+  pointer-events: none;
+}
+.overlay h2 {
+  max-width: 24ch;
+  margin: 0;
+}
+
+@media (min-width: 900px) and (min-aspect-ratio: 4 / 3) {
+  .overlay {
+    left: clamp(2rem, 6vw, 5rem);
+    right: auto;
+    max-width: 30rem;
+  }
+}
+
+.note {
+  font-size: 0.85rem;
+  color: var(--ink-faint);
+  font-style: italic;
+}
+
+/* ------------------------------ footer ------------------------------------ */
+.footer {
+  margin-top: var(--space-lg);
+  padding: var(--space-lg) var(--gutter);
+  background: var(--bg-tint);
+  border-top: 3px solid var(--maroon);
+}
+
+.footerLede {
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  max-width: 40rem;
+  color: var(--ink-soft);
+}
+
+.meta {
+  margin: var(--space-md) 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(11rem, 100%), 1fr));
+  gap: 1.25rem 2rem;
+}
+.meta dt {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 0.2rem;
+}
+.meta dd {
+  margin: 0;
+  font-weight: 560;
+}

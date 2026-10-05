@@ -1,0 +1,15 @@
+Run,Configuration ,,Point,"Yaw
+(°)","Vinf
+(mph)",,Run (Decoupled #),Configuration ,,Point,"Yaw
+(°)","Vinf
+(mph)"
+,,,,,,,,,,,,
+8,DRS Efficiency Test (Alt setup),,1,4,23.2,?,1,DRS Efficiency Test (Alt setup),,1,4,23.2
+8,DRS Efficiency Test (Alt setup),,2,8,23.2,?,1,DRS Efficiency Test (Alt setup),,4,4,34.8
+8,DRS Efficiency Test (Alt setup),,3,12,23.2,?,1,DRS Efficiency Test (Alt setup),,7,4,46.2
+8,DRS Efficiency Test (Alt setup),,4,4,34.8,?,2,DRS Efficiency Test (Alt setup),,2,8,23.2
+8,DRS Efficiency Test (Alt setup),,5,8,35,?,2,DRS Efficiency Test (Alt setup),,5,8,34.8
+8,DRS Efficiency Test (Alt setup),,6,12,34.8,?,2,DRS Efficiency Test (Alt setup),,8,8,46.2
+8,DRS Efficiency Test (Alt setup),,7,4,46.2,?,3,DRS Efficiency Test (Alt setup),,3,12,23.2
+8,DRS Efficiency Test (Alt setup),,8,8,46.2,?,3,DRS Efficiency Test (Alt setup),,6,12,34.8
+8,DRS Efficiency Test (Alt setup),,9,12,46.2,?,3,DRS Efficiency Test (Alt setup),,9,12,46.2

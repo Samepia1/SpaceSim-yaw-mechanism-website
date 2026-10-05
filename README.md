@@ -10,6 +10,20 @@ npm install
 npm run dev          # http://localhost:3000
 ```
 
+## Routes (samvelkerobyan.xyz)
+
+| Path | What |
+| --- | --- |
+| `/` | Landing page linking to the projects (`app/page.tsx`) |
+| `/Yaw_Mechanism` | This mechanism site (`app/Yaw_Mechanism/page.tsx`) |
+| `/FSAE/Aero-data` | FSAE aero dashboard, a standalone static export |
+
+The FSAE dashboard's source is `fsae-aero-explorer/` (see its README). It is
+published into `public/FSAE/Aero-data/` by `node scripts/sync-aero.mjs`, which
+also turns its relative asset URLs into absolute ones. Re-run that after changing
+the export and commit the result. `next.config.ts` rewrites the directory URL to
+its `index.html`.
+
 ---
 
 ## The one thing to understand first

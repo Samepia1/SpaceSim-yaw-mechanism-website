@@ -9,19 +9,9 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Independent Yaw Mechanism for a Cable-Driven Parallel Robot",
-  description:
-    "A yaw mechanism that lets a cable-driven parallel robot rotate its payload " +
-    "continuously instead of stopping at 30–40°, from bench prototype to a " +
-    "full-scale design built almost entirely from stock parts.",
+  title: "Samvel Kerobyan",
+  description: "Engineering projects by Samvel Kerobyan.",
   authors: [{ name: "Samvel Kerobyan" }],
-  openGraph: {
-    title: "Independent Yaw Mechanism for a Cable-Driven Parallel Robot",
-    description:
-      "3D models and scroll animations of the mechanism, " +
-      "from prototype to full scale. ARDC Lab, University of Minnesota.",
-    type: "website",
-  },
 };
 
 export const viewport: Viewport = {
